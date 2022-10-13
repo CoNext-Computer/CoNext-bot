@@ -29,8 +29,9 @@ nwipe --method=quick --logfile=log/nwipe.log
 #Test du disque short
 bash smart.sh short
 
-#Suppression des fichiers PART 
+#Suppression des fichiers PART et des résultats concernant les lecteurs optiques
 rm log/*-part*.log
+rm log/*DVD*.log
 
 #Déplacement des fichiers log vers le dossier hostname 
 cp log/* /mnt/nfs/logs/"$HOSTNAME"/
