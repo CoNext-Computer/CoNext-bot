@@ -34,13 +34,13 @@ rm log/*-part*.log
 rm log/*DVD*.log
 
 #Affichage des résultats du test SMART Short
-sed -n '6~7p' log/smart-short*.log
+grep "# 1" log/smart-short*.log
 
 # On vérfie manuellement le résultat du test SMART Short, afin de lancer un test long si nécessaire
 echo "Le resultat de la ligne # 1 renvoie \"Completed without error\" rentrer o pour oui, sinon taper sur la touche entree"
 for i in o; do
     bash smart.sh long
-    sed -n '6~7p' log/smart-long*.log
+    grep "#1" log/smart-long*.log
 done
 
 #Suppression des fichiers PART et des résultats concernant les lecteurs optiques
