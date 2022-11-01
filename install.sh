@@ -25,6 +25,9 @@ apt install -y -f nfs-common
 #Installation de NWipe, logiciel d'effacement de disques
 apt -y -f install nwipe
 
+#Installation de memtester, logiciel de test de la mémoire ramfree
+apt install -y -f memtester
+
 # Nettoyage et installation du script principal et du script de test des disques durs
 rm script.sh
 rm smart.sh
