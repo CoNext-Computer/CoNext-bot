@@ -16,4 +16,4 @@ Permet à l'utilisateur final de saisir un numéro d'inventaire, correspondant e
 * ***smart.sh***
 Créé par Meliorator (irc://irc.freenode.net/Meliorator) et amélioré par Ranpha, ce script permet de lister l'ensemble des stockages présents sur la machine et d'effectuer un test SMART short ou long suivant l'option choisie lors de son appel.
 
-Merci à @M3GH4N pour sa contribution à la partie nfs et à tous les tests effectués.
+Merci à M3GHAN pour sa contribution à la partie nfs et à tous les tests effectués.
