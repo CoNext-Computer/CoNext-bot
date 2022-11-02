@@ -8,6 +8,9 @@ Il est étudié pour une installation sur une distribution Linux basée sur Debi
 Permet de récupérer automatiquement la dernière version de l'installateur du script (install.sh) depuis un chemin réseau / adresse web.
 
 * ***install.sh***
+Permet de configurer les différentes variables (chemins, options) nécessaires au bon fonctionnement du script.
+
+* ***install.sh***
 Permet d'installer l'agent GLPI, installe les paquets nécessaires à l'accès d'un serveur nfs, nwipe et télécharge le script général (script.sh), le script permettant le test des disques durs (smart.sh) ainsi que le logiciel de test de mémoire vive memtester.
 
 * ***script.sh***
