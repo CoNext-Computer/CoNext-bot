@@ -58,6 +58,7 @@ done
 #Suppression des fichiers PART et des résultats concernant les lecteurs optiques
 rm $logpath/*-part*.log
 rm $logpath/*DVD*.log
+rm $logpath/*CD-ROM*.log
 
 #Déplacement des fichiers log vers le dossier hostname
 cp log/* /mnt/nfs/logs/"$HOSTNAME"/
