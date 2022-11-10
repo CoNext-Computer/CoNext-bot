@@ -11,6 +11,6 @@ mv main.conf main.conf.bak
 wget $downloadsource/main.conf
 
 #On écrit l'adresse de téléchargement dans le fichier de configuration
-sed -i '' "s|pathtoinstallfolder|$downloadsource|g" main.conf
+sed -i "s|pathtoinstallfolder|$downloadsource|g" main.conf
 bash install.sh
 rm install.sh
