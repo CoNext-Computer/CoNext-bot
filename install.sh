@@ -20,8 +20,11 @@ wget $glpiagentinstallurl
 perl glpi-agent-*-with-snap-linux-installer.pl
 rm glpi-agent-*-with-snap-linux-installer.pl
 
+#On rajoute les identifiants dans le fichier de configuration glpi-agent
+sed -i "s|user =|user = $httpuser|g" /etc/glpi-agent/agent.cfg
+sed -i "s|password =|password = $httppassword|g" /etc/glpi-agent/agent.cfg
 
-#Installation des packets NFS Client (
+#Installation des packets NFS Client
 apt install -y -f nfs-common
 
 
