@@ -7,7 +7,7 @@ Il est étudié pour une installation sur une distribution Linux basée sur Debi
 * ***init.sh***
 Permet de récupérer automatiquement la dernière version de l'installateur du script (install.sh) depuis un chemin réseau / adresse web.
 
-* ***install.sh***
+* ***main.conf***
 Permet de configurer les différentes variables (chemins, options) nécessaires au bon fonctionnement du script.
 
 * ***install.sh***
