@@ -44,6 +44,7 @@ bash smart.sh short
 #Suppression des fichiers PART et des résultats concernant les lecteurs optiques
 rm $logpath/*-part*.log
 rm $logpath/*DVD*.log
+rm $logpath/*CD-ROM*.log
 
 #Affichage des résultats du test SMART Short
 grep "# 1" $logpath/smart-short*.log
@@ -53,12 +54,10 @@ echo "Le resultat de la ligne # 1 renvoie \"Completed without error\" rentrer o 
 for i in o; do
     bash smart.sh long
     grep "#1" $logpath/smart-long*.log
+    rm $logpath/*-part*.log
+    rm $logpath/*DVD*.log
+    rm $logpath/*CD-ROM*.log
 done
-
-#Suppression des fichiers PART et des résultats concernant les lecteurs optiques
-rm $logpath/*-part*.log
-rm $logpath/*DVD*.log
-rm $logpath/*CD-ROM*.log
 
 #Déplacement des fichiers log vers le dossier hostname
 cp log/* /mnt/nfs/logs/"$HOSTNAME"/
