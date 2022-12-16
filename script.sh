@@ -17,14 +17,14 @@ rm $logpath/*.log
 glpi-agent --logfile=$logpath/glpi.log
 
 
-# Montage du dossier partagé NFS depuis le poste client
-mkdir -p /mnt/nfs/logs
+#STOCKAGE NFS#  Montage du dossier partagé NFS depuis le poste client
+#mkdir -p /mnt/nfs/logs
 
-# Montage du dossier NFS sur le serveur
-mount -t nfs $nfspath /mnt/nfs/logs
+#STOCKAGE NFS#  Montage du dossier NFS sur le serveur
+#mount -t nfs $nfspath /mnt/nfs/logs
 
-# Création du dossier "Hostname"
-mkdir /mnt/nfs/logs/"$HOSTNAME"
+#STOCKAGE NFS# Création du dossier "Hostname"
+#mkdir /mnt/nfs/logs/"$HOSTNAME"
 
 #Lancement de Nwipe avec l'option quick par défaut.
 nwipe --method=$nwipemethod --logfile=$logpath/nwipe.log
@@ -60,5 +60,11 @@ rm $logpath/*-part*.log
 rm $logpath/*DVD*.log
 rm $logpath/*CD-ROM*.log
 
-#Déplacement des fichiers log vers le dossier hostname
-cp log/* /mnt/nfs/logs/"$HOSTNAME"/
+#STOCKAGE NFS# Déplacement des fichiers log vers le dossier hostname
+#cp $logpath/* /mnt/nfs/logs/"$HOSTNAME"/
+
+#STOCKAGE FTP# Compression, rennomage de l'archive et déplacement des fichiers log vers le serveur
+
+tar -czvf log-"$HOSTNAME".tar.gz $logpath/*
+curl -T log-"$HOSTNAME".tar.gz ftp://"$ftpuser":"$ftppassword"@"$ftphost"/"$ftpdirectory"/
+rm log-"$HOSTNAME".tar.gz
