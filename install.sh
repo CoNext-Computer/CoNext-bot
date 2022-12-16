@@ -12,7 +12,7 @@ apt upgrade
 apt install -y -f snap
 
 #création du répertoire log
-mkdir log
+mkdir $logpath
 
 #Installation de l'agent glpi inventory
 rm glpi-agent-*-with-snap-linux-installer.pl
