@@ -1,8 +1,11 @@
 # Script by Meliorator. irc://irc.freenode.net/Meliorator
-# modified by Ranpha
+# modified by Ranpha & AntoninGP
+
+. main.conf
+
 [ ! "$@" ] && echo "Usage: $0 type [type] [type]"
 
-[ ! -e smart-logs ] && mkdir log
+[ ! -e smart-logs ] && mkdir $logpath
 [ ! -d smart-logs ] && Can not create smart-logs dir && exit 1
 
 a=0
@@ -24,10 +27,10 @@ for t in "$@"; do
                 sleep $(($a))m
 
         for hd in /dev/disk/by-id/ata*; do
-                smartctl -l $l -d ata $hd 2>&1 >> log/smart-${t}-${hd##*/}.log
+                smartctl -l $l -d ata $hd 2>&1 >> $logpath/smart-${t}-${hd##*/}.log
         done
 
-        
+
 done
 
 for i in {1..10}; do
