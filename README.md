@@ -1,8 +1,8 @@
-# CoNext-bot V2.1
+# CoNext-bot V2.2
 
 Ce script, découpé en plusieurs fichiers permet d'utiliser un environnement d'inventorisation via un agent GLPI, effacer un/des disques via NWipe et de tester les disques durs et la mémoire vive, tout en consignant le résultat des opérations dans un répertoire réseau NFS.
 
-Il est étudié pour une installation sur une distribution Linux basée sur Debian (testé et utilisé avec Debian-Live 11.7 sans interface graphique).
+Il est étudié pour une installation/utilisation sur une distribution Linux basée sur Debian (testé et utilisé avec Debian-Live 11.7 sans interface graphique).
 
 * ***init.sh***
 Permet de récupérer automatiquement la dernière version de l'installateur du script (install.sh) depuis un chemin réseau / adresse web.
