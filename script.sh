@@ -26,8 +26,8 @@ glpi-agent --logfile=$logpath/glpi.log
 #STOCKAGE NFS# Création du dossier "Hostname"
 #mkdir /mnt/nfs/logs/"$HOSTNAME"
 
-#Lancement de Nwipe avec l'option quick par défaut.
-nwipe --method=$nwipemethod --logfile=$logpath/nwipe.log
+#Lancement de Nwipe avec l'option quick , effacement automatique, excluant les volumes USB.
+nwipe --method=$nwipemethod --nousb --autonuke --nowait --logfile=$logpath/nwipe.log
 
 #Test de la RAM
 #On détermine quelle quantité de mémoire et on retire 100M afin d'allouer un maximum de mémoire pour le test test.
@@ -49,7 +49,7 @@ rm $logpath/*CD-ROM*.log
 #Affichage des résultats du test SMART Short
 grep "# 1" $logpath/smart-short*.log
 
-# On vérfie manuellement le résultat du test SMART Short, afin de lancer un test long si nécessaire
+# On vérfie manuellement le résultat du test SMART Short, afin de lancer un test long si nécessaire, on en profite pour supprimmer les résultats inintéressants.
 echo "Le resultat de la ligne # 1 renvoie \"Completed without error\" rentrer o pour oui, sinon taper sur la touche entree"
 for i in o; do
     bash smart.sh long
