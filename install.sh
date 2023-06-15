@@ -17,6 +17,7 @@ mkdir $logpath
 #Installation de l'agent glpi inventory
 rm glpi-agent-*-with-snap-linux-installer.pl
 wget $glpiagentinstallurl
+mv glpi-agent-*-with-snap-linux-installer.pla glpi-agent-1.5-with-snap-linux-installer.pl
 perl glpi-agent-*-with-snap-linux-installer.pl
 rm glpi-agent-*-with-snap-linux-installer.pl
 

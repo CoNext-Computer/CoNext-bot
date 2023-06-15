@@ -63,8 +63,6 @@ rm $logpath/*DVD*.log
 rm $logpath/*CD-ROM*.log
 
 
-
-
             # A décommenter si utilisation de FTP
 ####################################################################
 
@@ -78,3 +76,5 @@ rm $logpath/*CD-ROM*.log
 
 #Déplacement des fichiers log vers le dossier hostname
 cp $logpath/* /mnt/nfs/logs/"$HOSTNAME"/
+
+systemctl poweroff
