@@ -5,8 +5,6 @@
 
 [ ! "$@" ] && echo "Usage: $0 type [type] [type]"
 
-[ ! -e smart-logs ] && mkdir $logpath
-[ ! -d smart-logs ] && Can not create smart-logs dir && exit 1
 
 a=0
 
