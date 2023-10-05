@@ -1,11 +1,16 @@
 #!/bin/bash
-#On demande le numéro inventaire afin de faire concorder le hostname avec celui-ci pour GLPI et le partage NFS
+#On demande le numéro d'inventaire afin de l'intégrer dans GLPI et pour la sauvegarde des fichiers logs sur le serveur NFS/FTP
 
 . main.conf
 
 echo -n "Numero Inventaire?: "
 read ninventaire
-hostnamectl set-hostname $ninventaire
+
+grep -q "<INVENTORYNUMBER>" inventory.xml | sed -i.bak 's/<INVENTORYNUMBER>.*<\/INVENTORYNUMBER>/<INVENTORYNUMBER>${ninventaire}<\/INVENTORYNUMBER>/g' inventory.xml
+echo 'Le numero dinventaire est : '$ninventaire
+
+grep -q "<DEVICEID>" inventory.xml | sed -i.bak 's/<DEVICEID>.*<\/DEVICEID>/<DEVICEID>${ninventaire}<\/DEVICEID>/g' inventory.xml
+echo 'Le nom de machine dans GLPI est : '$ninventaire
 
 #Une mise à jour des dépôts ne fait jamais de mal
 sudo apt update
@@ -14,7 +19,7 @@ sudo apt update
 rm $logpath/*.log
 
 #Execution de glpi-agent afin deffectuer linventaire
-glpi-agent --logfile=$logpath/glpi.log
+glpi-agent --additional-content="inventory.xml" --logfile=$logpath/glpi.log
 
 
 
@@ -27,13 +32,8 @@ mkdir -p /mnt/nfs/logs
 #STOCKAGE NFS#  Montage du dossier NFS sur le serveur
 mount -t nfs $nfspath /mnt/nfs/logs
 
-#STOCKAGE NFS# Création du dossier "Hostname"
-mkdir /mnt/nfs/logs/"$HOSTNAME"
-
-######################################################################
-
-
-
+#STOCKAGE NFS# Création du dossier "niventaire"
+#mkdir /mnt/nfs/logs/"$niventaire"
 
 #Lancement de Nwipe avec l'option quick , effacement automatique, excluant les volumes USB.
 nwipe --method=$nwipemethod --nousb --autonuke --nowait --logfile=$logpath/nwipe.log
@@ -50,7 +50,6 @@ memtester $ramtest 1 >$logpath/memtest.log
 cat $logpath/memtest.log
 
 
-
 #On lance un smart test long.
 bash smart.sh long
 
@@ -63,18 +62,26 @@ rm $logpath/*DVD*.log
 rm $logpath/*CD-ROM*.log
 
 
+#STOCKAGE NFS# Déplacement des fichiers log vers le dossier niventaire
+#cp $logpath/* /mnt/nfs/logs/"$niventaire"/
+
             # A décommenter si utilisation de FTP
 ####################################################################
 
 #STOCKAGE FTP # Compression, rennomage de l'archive et déplacement des fichiers log vers le serveur
 
-#tar -czvf log-"$HOSTNAME".tar.gz $logpath/*
-#curl -T log-"$HOSTNAME".tar.gz ftp://"$ftpuser":"$ftppassword"@"$ftphost"/"$ftpdirectory"/
+#tar -czvf log-"$niventaire".tar.gz $logpath/*
+#curl -T log-"$niventaire".tar.gz ftp://"$ftpuser":"$ftppassword"@"$ftphost"/"$ftpdirectory"/
 #rm log-"$HOSTNAME".tar.gz
 #####################################################################
 
 
-#Déplacement des fichiers log vers le dossier hostname
-cp $logpath/* /mnt/nfs/logs/"$HOSTNAME"/
+
+tar -czvf log-"$niventaire".tar.gz $logpath/*
+curl -T log-"$niventaire".tar.gz ftp://"$ftpuser":"$ftppassword"@"$ftphost"/"$ftpdirectory"/
+rm log-"$niventaire".tar.gz
+
+#Déplacement des fichiers log vers le dossier niventaire
+cp log/* /mnt/nfs/logs/"$niventaire"/
 
 systemctl poweroff
