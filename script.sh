@@ -32,8 +32,8 @@ mkdir -p /mnt/nfs/logs
 #STOCKAGE NFS#  Montage du dossier NFS sur le serveur
 mount -t nfs $nfspath /mnt/nfs/logs
 
-#STOCKAGE NFS# Création du dossier "niventaire"
-mkdir /mnt/nfs/logs/"$niventaire"
+#STOCKAGE NFS# Création du dossier "ninventaire"
+mkdir /mnt/nfs/logs/"$ninventaire"
 
 #Lancement de Nwipe avec l'option quick , effacement automatique, excluant les volumes USB.
 nwipe --method=$nwipemethod --nousb --autonuke --nowait --logfile=$logpath/nwipe.log
@@ -63,16 +63,16 @@ rm $logpath/*CD-ROM*.log
 
 
 #STOCKAGE NFS# Déplacement des fichiers log vers le dossier niventaire
-cp $logpath/* /mnt/nfs/logs/"$niventaire"/
+cp $logpath/* /mnt/nfs/logs/"$ninventaire"/
 
             # A décommenter si utilisation de FTP
 ####################################################################
 
 #STOCKAGE FTP # Compression, rennomage de l'archive et déplacement des fichiers log vers le serveur
 
-#tar -czvf log-"$niventaire".tar.gz $logpath/*
-#curl -T log-"$niventaire".tar.gz ftp://"$ftpuser":"$ftppassword"@"$ftphost"/"$ftpdirectory"/
-#rm log-"$HOSTNAME".tar.gz
+#tar -czvf log-"$ninventaire".tar.gz $logpath/*
+#curl -T log-"$ninventaire".tar.gz ftp://"$ftpuser":"$ftppassword"@"$ftphost"/"$ftpdirectory"/
+#rm log-"$ninventaire".tar.gz
 #####################################################################
 
 systemctl poweroff
