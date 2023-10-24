@@ -33,7 +33,7 @@ mkdir -p /mnt/nfs/logs
 mount -t nfs $nfspath /mnt/nfs/logs
 
 #STOCKAGE NFS# Création du dossier "niventaire"
-#mkdir /mnt/nfs/logs/"$niventaire"
+mkdir /mnt/nfs/logs/"$niventaire"
 
 #Lancement de Nwipe avec l'option quick , effacement automatique, excluant les volumes USB.
 nwipe --method=$nwipemethod --nousb --autonuke --nowait --logfile=$logpath/nwipe.log
@@ -63,7 +63,7 @@ rm $logpath/*CD-ROM*.log
 
 
 #STOCKAGE NFS# Déplacement des fichiers log vers le dossier niventaire
-#cp $logpath/* /mnt/nfs/logs/"$niventaire"/
+cp $logpath/* /mnt/nfs/logs/"$niventaire"/
 
             # A décommenter si utilisation de FTP
 ####################################################################
@@ -74,14 +74,5 @@ rm $logpath/*CD-ROM*.log
 #curl -T log-"$niventaire".tar.gz ftp://"$ftpuser":"$ftppassword"@"$ftphost"/"$ftpdirectory"/
 #rm log-"$HOSTNAME".tar.gz
 #####################################################################
-
-
-
-tar -czvf log-"$niventaire".tar.gz $logpath/*
-curl -T log-"$niventaire".tar.gz ftp://"$ftpuser":"$ftppassword"@"$ftphost"/"$ftpdirectory"/
-rm log-"$niventaire".tar.gz
-
-#Déplacement des fichiers log vers le dossier niventaire
-cp log/* /mnt/nfs/logs/"$niventaire"/
 
 systemctl poweroff
