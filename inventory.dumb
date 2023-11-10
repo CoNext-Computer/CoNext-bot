@@ -1,0 +1,8 @@
+{
+   "action": "inventory",
+   "content": {
+      "hardware": {
+         "name": "dumbname"
+      }
+   }
+}

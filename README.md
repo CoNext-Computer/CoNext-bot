@@ -13,8 +13,8 @@ Permet de configurer les différentes variables (chemins, options) nécessaires 
 * ***install.sh***
 Permet d'installer l'agent GLPI, installe les paquets nécessaires à l'accès d'un serveur nfs, nwipe et télécharge le script général (script.sh), le script permettant le test des disques durs (smart.sh) ainsi que le logiciel de test de mémoire vive memtester.
 
-* ***inventory.xml***
-Fichier squelette, permettant de surcharger les informations envoyées à GLPI, utilisé afin de déterminer le nom de l'objet inventorié ainsi que le numéro d'inventaire dans GLPI, sans avoir à passer par la variable $hostname du système.
+* ***inventory.dumb***
+Fichier squelette, permettant de surcharger les informations envoyées à GLPI, utilisé afin de déterminer le nom de l'objet inventorié sans avoir à passer par la variable $hostname du système.
   
 * ***script.sh***
 Permet à l'utilisateur final de saisir un numéro d'inventaire, correspondant ensuite au nom de l'ordinateur dans GLPI, d'éxecuter l'agent-glpi se connectant à un serveur via la fonction AUTH_BASIC d'Apache, monter un dossier partagé avec un serveur NFS afin d'y enregistrer les fichiers logs ou de les envoyer sur un serveur FTP, éxecuter un test de mémoire vive, lancer l'effacement des disques en excluant les périphériques USB, ainsi qu'éxecuter un test rapide, puis long des disques.
