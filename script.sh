@@ -3,9 +3,11 @@
 
 . main.conf
 
+#On récupere le numero dinventaire
 echo -n "Numero Inventaire?: "
 read ninventaire
 
+#on fait une copie du fichier modele afin de garder un original propre, puis on remplace le texte "dumbname"
 cp inventory.dumb inventory.json
 grep -q "dumbname" inventory.json | sed -i "s/dumbname/${ninventaire}/g" inventory.json
 echo 'Le nom de machine dans GLPI est : '$ninventaire
