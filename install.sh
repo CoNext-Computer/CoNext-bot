@@ -39,4 +39,4 @@ rm script.sh
 rm smart.sh
 wget $downloadsource/script.sh
 wget $downloadsource/smart.sh
-wget $downloadsource/inventory.xml
+wget $downloadsource/inventory.dumb
