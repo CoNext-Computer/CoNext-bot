@@ -6,10 +6,8 @@
 echo -n "Numero Inventaire?: "
 read ninventaire
 
-grep -q "<INVENTORYNUMBER>" inventory.xml | sed -i.bak 's/<INVENTORYNUMBER>.*<\/INVENTORYNUMBER>/<INVENTORYNUMBER>${ninventaire}<\/INVENTORYNUMBER>/g' inventory.xml
-echo 'Le numero dinventaire est : '$ninventaire
-
-grep -q "<DEVICEID>" inventory.xml | sed -i.bak 's/<DEVICEID>.*<\/DEVICEID>/<DEVICEID>${ninventaire}<\/DEVICEID>/g' inventory.xml
+cp inventory.dumb inventory.json
+grep -q "dumbname" inventory.json | sed -i "s/dumbname/${ninventaire}/g" inventory.json
 echo 'Le nom de machine dans GLPI est : '$ninventaire
 
 #Une mise à jour des dépôts ne fait jamais de mal
@@ -19,7 +17,9 @@ sudo apt update
 rm $logpath/*.log
 
 #Execution de glpi-agent afin deffectuer linventaire
-glpi-agent --additional-content="inventory.xml" --logfile=$logpath/glpi.log
+glpi-agent --additional-content="inventory.json" --logfile=$logpath/glpi.log
+
+rm inventory.json
 
 
 
