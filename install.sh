@@ -6,7 +6,7 @@
 
 #Une mise à jour des dépôts ne fait jamais de mal
 apt update
-apt upgrade
+apt upgrade -y
 
 #Installation de SNAP (obligatoire pour glpi-agent)
 apt install -y -f snap
@@ -16,7 +16,7 @@ mkdir $logpath
 
 #Installation de l'agent glpi inventory
 rm glpi-agent-*-with-snap-linux-installer.pl
-wget $glpiagentinstallurl
+wget $glpiagentinstallurl || { echo "Échec du téléchargement de glpi"; exit 1; }
 perl glpi-agent-*-with-snap-linux-installer.pl
 rm glpi-agent-*-with-snap-linux-installer.pl
 
@@ -37,6 +37,6 @@ apt install -y -f memtester
 # Nettoyage et installation du script principal et du script de test des disques durs
 rm script.sh
 rm smart.sh
-wget $downloadsource/script.sh
-wget $downloadsource/smart.sh
-wget $downloadsource/inventory.dumb
+wget $downloadsource/script.sh || { echo "Échec du téléchargement de script.sh"; exit 1; }
+wget $downloadsource/smart.sh || { echo "Échec du téléchargement de smart.sh"; exit 1; }
+wget $downloadsource/inventory.dumb || { echo "Échec du téléchargement de inventory.dumb"; exit 1; }
