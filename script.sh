@@ -64,7 +64,7 @@ rm $logpath/*DVD*.log
 rm $logpath/*CD-ROM*.log
 
 
-#STOCKAGE NFS# Déplacement des fichiers log vers le dossier niventaire
+#STOCKAGE NFS# Déplacement des fichiers log vers le dossier ninventaire
 cp $logpath/* /mnt/nfs/logs/"$ninventaire"/
 
             # A décommenter si utilisation de FTP
