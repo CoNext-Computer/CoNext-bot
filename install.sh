@@ -31,12 +31,12 @@ apt install -y -f nfs-common
 #Installation de NWipe, logiciel d'effacement de disques
 apt install -y -f nwipe
 
-#Installation de memtester, logiciel de test de la mémoire ramfree
+#Installation de memtester, logiciel de test de la mémoire ram
 apt install -y -f memtester
 
 # Nettoyage et installation du script principal et du script de test des disques durs
-rm script.sh
-rm smart.sh
+rm script.sh smart.sh inventory.dumb
+
 wget $downloadsource/script.sh || { echo "Échec du téléchargement de script.sh"; exit 1; }
 wget $downloadsource/smart.sh || { echo "Échec du téléchargement de smart.sh"; exit 1; }
 wget $downloadsource/inventory.dumb || { echo "Échec du téléchargement de inventory.dumb"; exit 1; }
