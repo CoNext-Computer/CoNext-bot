@@ -3,9 +3,18 @@
 
 . main.conf
 
-#On récupere le numero dinventaire
-echo -n "Numero Inventaire?: "
-read ninventaire
+while true; do
+    # Validation du numéro d'inventaire
+    echo -n "Numéro Inventaire?: "
+    read ninventaire
+
+    # Vérification de la validité du numéro d'inventaire (doit commencer par deux lettres et être suivi de 9 chiffres)
+    if [[ "$ninventaire" =~ ^[A-Za-z]{2}[0-9]{9}$ ]]; then
+        break  # Sortir de la boucle si le numéro est valide
+    else
+        echo "Erreur : Numéro d'inventaire non valide. Doit commencer par deux lettres et être suivi de 9 chiffres."
+    fi
+done
 
 #on fait une copie du fichier modele afin de garder un original propre, puis on remplace le texte "dumbname"
 cp inventory.dumb inventory.json
