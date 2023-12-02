@@ -61,16 +61,34 @@ memtester $ramtest 1 >$logpath/memtest.log
 cat $logpath/memtest.log
 
 
-#On lance un smart test long.
-bash smart.sh long
+# Fonction pour effectuer un test SMART
+perform_smart_test() {
+    local test_type=$1
+    bash smart.sh "$test_type"
 
-#Affichage des résultats du test long.
-grep "#1" $logpath/smart-long*.log
+    # Suppression des résultats inintéressants.
+	rm "$logpath"/*-{part*,DVD*,CD-ROM*}.log
+}
 
-#On supprimme les résultats inintéressants.
-rm $logpath/*-part*.log
-rm $logpath/*DVD*.log
-rm $logpath/*CD-ROM*.log
+# Lancement d'un test court du disque
+perform_smart_test short
+
+# Vérification du résultat du test court
+if grep -q "completed without error" "$logpath/smart-short*.log"; then
+    echo "Le test court du disque a réussi. Lancement du test long."
+
+    # Lancement d'un test long du disque
+    perform_smart_test long
+
+    # Vérification du résultat du test long
+    if grep -q "completed without error" "$logpath/smart-long*.log"; then
+        echo "Le test long du disque a réussi."
+    else
+        echo "Le test long du disque a échoué."
+    fi
+else
+    echo "Le test court du disque a échoué. Aucun test long ne sera effectué."
+fi
 
 
 #STOCKAGE NFS# Déplacement des fichiers log vers le dossier ninventaire
