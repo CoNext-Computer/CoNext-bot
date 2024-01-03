@@ -8,11 +8,11 @@ echo -n "Mot de passe utilisateur pour AUTH Appache: "
 read httppassword
 
 #On télécharge le fichier d'installation du script
-wget $downloadsource/install.sh
+wget $downloadsource/install.sh || { echo "Échec du téléchargement de install.sh"; exit 1; }
 
 #On fait une sauvegarde de l'ancienne configuration et on télécharge une version vierge.
 mv main.conf main.conf.bak
-wget $downloadsource/main.conf
+wget $downloadsource/main.conf || { echo "Échec du téléchargement de main.conf"; exit 1; }
 
 #On écrit l'adresse de téléchargement dans le fichier de configuration
 sed -i "s|pathtoinstallfolder|$downloadsource|g" main.conf
